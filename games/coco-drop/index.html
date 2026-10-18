@@ -48,7 +48,7 @@ async function unlock(pw) {
 }
 
 function render(html) {
-  document.open(); document.write(html); document.close();
+  document.open(); document.write(html.replace("</head>", '<link rel="stylesheet" href="./title-layout.css"></head>')); document.close();
 }
 
 document.getElementById("f").addEventListener("submit", async ev => {
