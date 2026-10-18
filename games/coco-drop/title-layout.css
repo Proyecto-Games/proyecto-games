@@ -1,97 +1,32 @@
-/* The game's canvas animates the fruit cast. Keep it visible with the beach and ladder. */
-.skin-classic.on-title #title-screen { background: none; }
-
-.skin-classic.on-title #logo {
-  font-size: calc(var(--u) * 79);
-  animation: title-logo-float 4.2s ease-in-out infinite;
-}
-.skin-classic.on-title #logo .o-coco::before {
-  transform-origin: center;
-  animation: title-rays 3.8s ease-in-out infinite;
-}
-.skin-classic.on-title #logo::before {
-  transform-origin: 80% 75%;
-  animation: title-leaf-left 4.8s ease-in-out infinite;
-}
-.skin-classic.on-title #logo::after {
-  transform-origin: 20% 75%;
-  animation: title-leaf-right 5.2s ease-in-out infinite;
-}
-.skin-classic.on-title #logo .l1::before {
-  animation: title-sparkle 2.8s ease-in-out infinite;
-}
-.skin-classic.on-title #logo .l1::after {
-  animation: title-sparkle 3.3s ease-in-out 1s infinite;
-}
-.skin-classic.on-title #tagline {
-  animation: title-tagline-float 4.2s ease-in-out 0.5s infinite;
-}
-.skin-classic.on-title #play-btn {
-  animation: title-play-float 2.9s ease-in-out infinite;
-}
-.skin-classic.on-title #title-screen .chip {
-  animation: title-medal-glow 3.6s ease-in-out infinite;
-}
-.skin-classic.on-title #beach {
-  transform-origin: center center;
-  animation: title-beach-drift 18s ease-in-out infinite alternate;
-}
-.skin-classic.on-title #beach-front {
-  transform-origin: center bottom;
-  animation: title-foreground-sway 7s ease-in-out infinite alternate;
-}
-
-@keyframes title-logo-float {
-  0%, 100% { transform: translateY(0) rotate(-0.5deg); }
-  50% { transform: translateY(calc(var(--u) * -5)) rotate(0.5deg); }
-}
-@keyframes title-rays {
-  0%, 100% { opacity: 0.8; transform: scale(0.97); }
-  50% { opacity: 1; transform: scale(1.08); }
-}
-@keyframes title-leaf-left {
-  0%, 100% { transform: rotate(-2deg); }
-  50% { transform: rotate(4deg); }
-}
-@keyframes title-leaf-right {
-  0%, 100% { transform: scaleX(-1) rotate(-2deg); }
-  50% { transform: scaleX(-1) rotate(4deg); }
-}
-@keyframes title-sparkle {
-  0%, 100% { opacity: 0.55; transform: scale(0.78) rotate(-15deg); }
-  50% { opacity: 1; transform: scale(1.1) rotate(12deg); }
-}
-@keyframes title-tagline-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(calc(var(--u) * -3)); }
-}
-@keyframes title-play-float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(calc(var(--u) * -5)) scale(1.035); }
-}
-@keyframes title-medal-glow {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.08); }
-}
-@keyframes title-beach-drift {
-  0% { transform: scale(1.045) translateX(-0.45%); }
-  100% { transform: scale(1.045) translateX(0.45%); }
-}
-@keyframes title-foreground-sway {
-  0% { transform: scale(1.015) translateX(-0.3%); }
-  100% { transform: scale(1.015) translateX(0.3%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .skin-classic.on-title #logo,
-  .skin-classic.on-title #logo .o-coco::before,
-  .skin-classic.on-title #logo::before,
-  .skin-classic.on-title #logo::after,
-  .skin-classic.on-title #logo .l1::before,
-  .skin-classic.on-title #logo .l1::after,
-  .skin-classic.on-title #tagline,
-  .skin-classic.on-title #play-btn,
-  .skin-classic.on-title #title-screen .chip,
-  .skin-classic.on-title #beach,
-  .skin-classic.on-title #beach-front { animation: none; }
-}
+/* Title-only art. Gameplay and the original #shelf stay native. */
+body.on-title .title-art-background{display:block;position:fixed;inset:-1.5%;z-index:0;pointer-events:none;background:url('./title-background.png') center/100% 100% no-repeat;animation:shore-drift 18s ease-in-out infinite alternate}
+body:not(.on-title) .title-art-background{display:none}
+body.on-title #beach,body.on-title #scenery,body.on-title #beach-front,body.on-title #game{visibility:hidden}
+body.on-title #title-screen{background:transparent;overflow:visible}
+body.on-title #title-screen .title-art-crate{position:absolute;z-index:1;width:111%;height:auto;left:-5.5%;top:34%;pointer-events:none;filter:drop-shadow(0 calc(var(--u)*5) calc(var(--u)*4) rgba(111,54,22,.18));animation:crate-breathe 6s ease-in-out infinite}
+body.on-title #title-screen .title-art-fruits{position:absolute;z-index:2;inset:0;pointer-events:none}
+body.on-title #title-screen .title-art-fruit{position:absolute;height:auto;max-width:none;filter:drop-shadow(0 calc(var(--u)*3) calc(var(--u)*2) rgba(90,45,22,.19));transform-origin:center 85%;animation:fruit-bob var(--fruit-time) ease-in-out var(--fruit-delay) infinite}
+body.on-title .title-fruit-lemon{left:11%;top:48%;width:12%;--fruit-time:3.7s;--fruit-delay:-.8s}
+body.on-title .title-fruit-grapes{left:27%;top:43%;width:22%;--fruit-time:4.3s;--fruit-delay:-1.4s}
+body.on-title .title-fruit-orange{left:56%;top:44%;width:22%;--fruit-time:3.8s;--fruit-delay:-2.1s}
+body.on-title .title-fruit-cherry{left:75%;top:50%;width:16%;--fruit-time:4.6s;--fruit-delay:-.3s}
+body.on-title .title-fruit-melon{left:1%;top:58%;width:36%;--fruit-time:5.2s;--fruit-delay:-1.7s}
+body.on-title .title-fruit-coconut{left:32%;top:54%;width:37%;--fruit-time:4.1s;--fruit-delay:-.9s}
+body.on-title .title-fruit-watermelon{left:66%;top:59%;width:36%;--fruit-time:4.8s;--fruit-delay:-2.8s}
+body.on-title .title-fruit-peach{left:1%;top:74%;width:21%;--fruit-time:3.9s;--fruit-delay:-2.3s}
+body.on-title #title-screen .title-top{z-index:3;top:0;height:35%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0}
+body.on-title #logo{display:block;flex:none;width:94%;height:84%;margin:0 auto;font-size:0;line-height:0;background:url('./title-logo.png') center/contain no-repeat;animation:logo-float 4.2s ease-in-out infinite}
+body.on-title #logo>*{display:none}
+body.on-title #logo::before,body.on-title #logo::after{display:none}
+body.on-title #tagline{flex:none;width:93%;max-width:none;min-height:calc(var(--u)*31);padding:calc(var(--u)*5);margin-top:calc(var(--u)*-2);border:calc(var(--u)*2) solid #fff9e8;border-radius:999px;background:#ffdb96;box-shadow:0 calc(var(--u)*4) 0 #e8b875;color:#5e2a13;font-size:calc(var(--u)*12);font-weight:700;line-height:1.2;letter-spacing:.02em;white-space:nowrap;text-align:center;animation:tagline-float 4.2s ease-in-out .4s infinite}
+body.on-title #title-screen .title-bottom{z-index:4;top:77%;bottom:auto;width:100%;height:auto;display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*8)}
+body.on-title #play-btn{width:68%;min-height:calc(var(--u)*78);padding:calc(var(--u)*7) calc(var(--u)*19);border-radius:calc(var(--u)*38);color:#fff7dc;font-size:calc(var(--u)*49);line-height:1;animation:play-float 2.9s ease-in-out infinite}
+body.on-title #title-screen .chip{min-width:46%;min-height:calc(var(--u)*38);justify-content:center;border:calc(var(--u)*3) solid #fff8e8;border-radius:999px;background:#ffdb96;box-shadow:0 calc(var(--u)*4) 0 #d59d5d;color:#5e2a13;font-weight:800;animation:medal-glow 3.5s ease-in-out infinite}
+@keyframes shore-drift{from{transform:scale(1.015) translateX(-.35%)}to{transform:scale(1.015) translateX(.35%)}}
+@keyframes crate-breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(calc(var(--u)*2)) scale(1.003)}}
+@keyframes fruit-bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(calc(var(--u)*-7)) rotate(2deg)}}
+@keyframes logo-float{0%,100%{transform:translateY(0) rotate(-.4deg)}50%{transform:translateY(calc(var(--u)*-4)) rotate(.4deg)}}
+@keyframes tagline-float{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(var(--u)*-2))}}
+@keyframes play-float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(calc(var(--u)*-5)) scale(1.035)}}
+@keyframes medal-glow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
+@media(prefers-reduced-motion:reduce){body.on-title .title-art-background,body.on-title #title-screen .title-art-crate,body.on-title #title-screen .title-art-fruit,body.on-title #logo,body.on-title #tagline,body.on-title #play-btn,body.on-title #title-screen .chip{animation:none}}
